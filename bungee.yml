@@ -1,0 +1,4 @@
+name: ABMCOfflineAlert
+version: 1.0
+main: server.alanbecker.net.OfflineListener
+author: MasterGabeMOD
