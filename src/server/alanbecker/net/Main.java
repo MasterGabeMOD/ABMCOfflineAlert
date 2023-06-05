@@ -4,7 +4,6 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
 import java.util.concurrent.TimeUnit;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +32,7 @@ public class Main {
             for (String serverName : monitoredServers) {
                 if (serverStatus.get(serverName) == false && serverOfflineTimestamps.containsKey(serverName) &&
                         currentTime - serverOfflineTimestamps.get(serverName) >= TimeUnit.MINUTES.toMillis(5)) {
-                    String message = "§c§lAttention! The server §a§l" + serverName + " §c§lhas been offline for more than 5 minutes! Please contact an administrator if you believe the server has crashed!";
+                    String message = "§c§lAttention! §cThe server §f§l" + serverName + " §chas been offline for more than 5 minutes! §cPlease contact an administrator if you believe this is an error.";
                     ProxyServer.getInstance().broadcast(message);
                     serverOfflineTimestamps.remove(serverName);
                 }
@@ -68,5 +67,8 @@ public class Main {
             });
         }
     }
+    
+    public void runServerCheck() {
+        checkServers();
+    }
 }
-//Discord
