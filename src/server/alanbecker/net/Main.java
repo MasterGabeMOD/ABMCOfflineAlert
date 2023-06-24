@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
+
 
 public class Main {
 
@@ -41,6 +44,8 @@ public class Main {
     }
 
     public void checkServers() {
+        Set<String> alreadyBroadcasted = new HashSet<>();
+
         for (String serverName : monitoredServers) {
             ServerInfo server = ProxyServer.getInstance().getServerInfo(serverName);
             if (server == null) {
@@ -50,24 +55,31 @@ public class Main {
             server.ping((result, error) -> {
                 boolean online = error == null;
 
-                if (serverStatus.containsKey(serverName) && serverStatus.get(serverName) != online) {
-                    serverStatus.put(serverName, online);
+                if (serverStatus.containsKey(serverName)) {
+                    boolean previousStatus = serverStatus.get(serverName);
+                    if (previousStatus != online && !alreadyBroadcasted.contains(serverName)) {
+                        serverStatus.put(serverName, online);
+                        alreadyBroadcasted.add(serverName);
 
-                    String message = "§f§lAttention! The server §c§l" + serverName + " §f§lis now " + (online ? "§a§lonline!" :
-                            "§c§loffline!");
+                        String message = "§f§lAttention! The server §c§l" + serverName + " §f§lis now " + (online ? "§a§lonline!" :
+                                "§c§loffline!");
 
-                    ProxyServer.getInstance().broadcast(message);
+                        ProxyServer.getInstance().broadcast(message);
 
-                    if (!online) {
-                        serverOfflineTimestamps.put(serverName, System.currentTimeMillis());
-                    } else {
-                        serverOfflineTimestamps.remove(serverName);
+                        if (!online) {
+                            serverOfflineTimestamps.put(serverName, System.currentTimeMillis());
+                        } else {
+                            serverOfflineTimestamps.remove(serverName);
+                        }
+                    } else if (previousStatus == online && alreadyBroadcasted.contains(serverName)) {
+                        alreadyBroadcasted.remove(serverName);
                     }
                 }
             });
         }
     }
-    
+
+
     public void runServerCheck() {
         checkServers();
     }
