@@ -6,6 +6,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Gabe/Documents/dependencies/BungeeCord.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gabe/git/Velocity/build/libs/velocity-3.3.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gabe/git/Velocity/api/build/libs/velocity-api-3.3.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gabe/Documents/dependencies/adventure-api-4.14.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

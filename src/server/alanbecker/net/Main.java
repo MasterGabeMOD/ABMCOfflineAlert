@@ -17,8 +17,8 @@ public class Main {
     private final Map<String, Boolean> serverStatus = new HashMap<>();
     private final Map<String, Long> serverOfflineTimestamps = new HashMap<>();
     private final List<String> monitoredServers = Arrays.asList(
-            "Lobby1", "Lobby2", "BattleGrounds", "Factions",
-            "PSurvival", "Creative", "Survival", "Vanilla"
+            "Lobby1", "PSurvival", "BattleGrounds", "Skyblock",
+            "Creative"
     );
     private ScheduledTask offlineAlertTask;
 
